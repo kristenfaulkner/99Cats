@@ -1,0 +1,23 @@
+<h2>Choose from all our different cats!</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Birthdate</th>
+    <th>Color</th>
+    <th>Sex</th>
+    <th>Link to Cat's profile page</th>
+  </tr>
+  <%@cats.each do |cat|%>
+  <tr>
+    <td><%=cat.name%></td>
+    <td><%=cat.age%></td>
+    <td><%=cat.birth_date%></td>
+    <td><%=cat.color%></td>
+    <td><%=cat.sex%></td>
+    <td><%= link_to "#{cat.name}'s profile", cat_url(cat)%></td>
+  </tr>
+  <%end%>
+</table>
+<br>
+<%= link_to "Post a new cat!", new_cat_url %>

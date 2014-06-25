@@ -1,0 +1,31 @@
+<form method="post" action="/cats/<%= @cat.id %>">
+  <% if @cat.persisted? %>
+    <input name="_method" type="hidden" value="patch">
+  <% end %>
+  
+  <!-- <input type="hidden" name="auth_key" value=<%= 3 %>> -->
+  Name:
+      <input type="text" name="cat[name]" 
+      placeholder="name" value = <%= @cat.name %>>
+      <br>
+  Age: 
+      <input type="integer" name="cat[age]" 
+      placeholder="age" value = <%= @cat.age %> >
+      <br>
+  Birthdate: 
+      <input type="date" name="cat[birth_date]" 
+      placeholder= "birthdate" value = <%= @cat.birth_date %>>
+      <br>
+  Color: 
+      <select name="cat[color]" value = <%= @cat.color %>>
+        <option value="black">Black</option>
+        <option value="white">White</option>
+        <option value="gray">Gray</option>
+        <option value="polka_dot">Polka-dot</option>
+      </select><br>
+  Sex: 
+      <input type="radio" name="cat[sex]" value="M">Male
+      <input type="radio" name="cat[sex]" value="F">Female<br>
+      <input type="submit" value="Save cat">
+</form>
+<br>

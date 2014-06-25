@@ -1,0 +1,21 @@
+<ul>
+    <li>
+      Name: <%=@cat.name%>
+    </li>
+    <li>
+      Age: <%=@cat.age%>
+    </li>
+    <li>
+      Birthdate: <%=@cat.birth_date%>
+    </li>
+    <li>
+      Color: <%=@cat.color%>
+    </li>
+    <li>
+      Sex: <%=@cat.sex%>
+    </li>
+</ul>
+ <%=link_to "Edit your cat", edit_cat_url(@cat)%>
+ <br>
+<%=link_to "<< Back to All Cats", cats_url%>
+ 
