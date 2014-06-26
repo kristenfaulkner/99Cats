@@ -12,9 +12,11 @@
       <input type="integer" name="cat[age]" 
       placeholder="age" value = <%= @cat.age %> >
       <br>
+      <br>
   Birthdate: 
       <input type="date" name="cat[birth_date]" 
       placeholder= "birthdate" value = <%= @cat.birth_date %>>
+      <br>
       <br>
   Color: 
       <select name="cat[color]" value = <%= @cat.color %>>
@@ -23,9 +25,16 @@
         <option value="gray">Gray</option>
         <option value="polka_dot">Polka-dot</option>
       </select><br>
+      <br>
   Sex: 
       <input type="radio" name="cat[sex]" value="M">Male
       <input type="radio" name="cat[sex]" value="F">Female<br>
+      <br>
+  Picture (url):
+      <input type="text" name="cat[image_url]" 
+      placeholder="default image" value = '' size="60">
+      <br>  
+      <br>
       <input type="submit" value="Save cat">
 </form>
 <br>

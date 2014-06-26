@@ -1,6 +1,11 @@
+
 <h2>Choose from all our different cats!</h2>
-<table>
+<%= link_to "Rent-a-cat today!", new_cat_rental_request_url %>
+<br>
+<br>
+<table align = "center">
   <tr>
+    <th>Cat Serial Number</th>
     <th>Name</th>
     <th>Age</th>
     <th>Birthdate</th>
@@ -10,6 +15,7 @@
   </tr>
   <%@cats.each do |cat|%>
   <tr>
+    <td><%=cat.id%></td>
     <td><%=cat.name%></td>
     <td><%=cat.age%></td>
     <td><%=cat.birth_date%></td>
