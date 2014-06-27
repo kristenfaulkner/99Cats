@@ -1,13 +1,16 @@
+<body style="background-image: url(<%= asset_path 'cats.jpg' %>)">
 <h1>Sign In! Cats Await</h1>
 <form method="post" action="<%=session_url%>">
   <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %>>
   Username:
-      <input type="text" name="user[user_name]" 
+      <input type="text" class="myclass" name="user[user_name]" 
       placeholder="User Name" value = <%= @user.user_name %>>
       <br>
   Password: 
-      <input type="password" name="user[password]" 
+      <input type="password" class="myclass" name="user[password]" 
       placeholder="password" value = <%= @user.password %>>
       <br>
-  <input type="submit" value="Login">
+      <br>
+  <input type="submit" value="Login!">
 </form>
+</body>

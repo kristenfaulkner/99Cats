@@ -1,8 +1,21 @@
-<ul style="list-style: none;">
+<!-- <div style=background-color:#FFFFFF;><ul style="list-style: none;"> -->
+<ul style="list-style: none; ">
+    IMAGE OF THE CAT!!!<br>
     <li>
-      IMAGE OF THE CAT!!!<br><img src= "<%= @cat.image_url %>" width="20%" height="20%">
+      <img src= "<%= @cat.image_url %>" width="20%" height="20%">
     </li>
+    <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %>>
+    <% if self.current_user.id == @cat.user_id %>
+      <%=link_to "Edit your cat", edit_cat_url(@cat) %>
+    <% end %>
+    <form action="/cats/<%= @cat.id %>" method="post">
+      <% if self.current_user.id == @cat.user_id %>
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete Your Cat">
+      <% end %>
+    </form>
     <% session[:cat_id] = @cat.id %>
+    <% session[:cat_img_url] = @cat.image_url %>
     <% if self.current_user.id != @cat.user_id %>
     <h3><%= link_to "Click Here To Rent Me Now!!!!!", new_cat_rental_request_url %></h3>
     <% end %>
@@ -52,7 +65,7 @@
   <% end %>
   <% end %>
 </ul>
- <%=link_to "Edit your cat", edit_cat_url(@cat)%>
- <br>
+<br>
 <%=link_to "<< Back to All Cats", cats_url%>
+<!-- </div> -->
  

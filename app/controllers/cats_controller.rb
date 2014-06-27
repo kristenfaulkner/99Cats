@@ -12,6 +12,7 @@ class CatsController < ApplicationController
   end
   
   def new
+    session[:method] = "new"
     @cat = Cat.new
   end
   
@@ -30,7 +31,7 @@ class CatsController < ApplicationController
   
   def edit
     if !verify_owner
-      flash[:notice]= "Sorry you do not own this cat"
+      flash[:notice]= "Sorry, YOU do not own THIS cat mother fucker."
       redirect_to cat_url(@cat)
     else
       @cat = Cat.find(params[:id])
@@ -51,6 +52,12 @@ class CatsController < ApplicationController
         render 'edit'
       end
     end
+  end
+  
+  def destroy
+    @cat = Cat.find(params[:id])
+    @cat.destroy
+    redirect_to cats_url
   end
   
   def verify_owner

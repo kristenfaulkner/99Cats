@@ -27,11 +27,17 @@ class CatRentalRequestsController < ApplicationController
     if params[:cat_rental_request][:status] == "APPROVE"
       @cat_rental_request.update(:status => "APPROVED")
       flash[:notice] = "Rental Request Approved"
-      redirect_to cats_url
+      @cat = Cat.find(@cat_rental_request.cat_id)
+      session[:cat_id] = @cat.id
+      render '/cats/show'
+      #redirect_to cats_url(Cat.find(@cat_rental_request.cat_id))
     elsif params[:cat_rental_request][:status] == "DENY"
       @cat_rental_request.update(:status => "DENIED")
       flash[:notice] = "Rental Request Denied"
-      redirect_to cats_url
+      @cat = Cat.find(@cat_rental_request.cat_id)
+      session[:cat_id] = @cat.id
+      render '/cats/show'
+      #redirect_to cats_url(Cat.find(@cat_rental_request.cat_id))
     end
   end
   

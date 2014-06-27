@@ -1,22 +1,34 @@
 <h1>Welcome <%= @user.user_name %>!</h1>
+
+<table align="center">
+<tr>
+<td>
+<form method="get" action=<%= cats_url %>>
+  <input type="submit" value="Account Page">
+</form>
+</td><td>
 <form method="post" action=<%= session_url %>>
   <input type="hidden" name="_method" value="DELETE">
   <input type="submit" value="Log Out">
   <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %>>
 </form>
-<h2>Choose from all our different cats!</h2>
-<table align = "center">
-  <tr>
-    <th>Cat Serial Number</th>
+</td></tr>
+</table>
+
+<h2>Choose From All Our Different Cats!</h2>
+<table align="center">
+  <tr class="spaceUnder">
+    <th>Serial Number</th>
     <th>Name</th>
     <th>Age</th>
     <th>Birthdate</th>
     <th>Color</th>
     <th>Sex</th>
-    <th>Link to Cat's profile page</th>
+    <th>Profile Page</th>
   </tr>
-  <%@cats.each do |cat|%>
   <tr>
+  <%@cats.each do |cat|%>
+  <tr class="spaceUnder">
     <td><%=cat.id%></td>
     <td><%=cat.name%></td>
     <td><%=cat.age%></td>
@@ -28,4 +40,4 @@
   <%end%>
 </table>
 <br>
-<%= link_to "Post a new cat!", new_cat_url %>
+<%= link_to "Post A New Cat!", new_cat_url %>

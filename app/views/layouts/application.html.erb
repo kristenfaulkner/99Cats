@@ -3,12 +3,49 @@
 <head>
   <title>Cats</title>
   <%= csrf_meta_tags %>
-</head>
-<body>
+  <style>
+  .myclass {
+          height: 20px;
+          position: relative;
+          border: 2px solid #cdcdcd;
+          border-color: rgba(0,0,0,.14);
+          background-color: White;   ;
+          font-size: 14px;
+      }
+      /*AliceBlue*/
+  .advancedSearchTextbox {
+      width: 526px;
+      margin-right: -4px;
+  }
   
+  * {
+   font-size: 100%;
+   font-family: monaco;
+  }
+  
+  ul
+  {
+      list-style: none;
+  }
+  
+  tr.spaceUnder > td
+  {
+    padding-bottom: 3em;
+  }
+  
+  tr.horLines {
+      border-bottom: 1px solid black;
+      border-top: 1px solid black;
+      border-collapse: collapse;
+  }​
+  
+  </style>
+</head>
+
 <p class="flash"><%= flash.notice %></p>
 
 <%= yield %>
 
 </body>
 </html>
+<!-- 'http://jasonlefkowitz.net/wp-content/uploads/2013/07/cats-16140154-1920-1080.jpg' -->
