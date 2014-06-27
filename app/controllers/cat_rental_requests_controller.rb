@@ -14,7 +14,6 @@ class CatRentalRequestsController < ApplicationController
         @cat_rental_request.destroy
         flash[:notice] = "Sorry, Cat Taken On These Dates!"
         render 'new'
-        #redirect_to cats_url(@cat.find(session[:cat_id]))
       end
     else
       flash[:notice] = "Invalid Request! Please Try Again"
@@ -26,6 +25,11 @@ class CatRentalRequestsController < ApplicationController
     @cat_rental_request = CatRentalRequest.find(params[:id])
     if params[:cat_rental_request][:status] == "APPROVE"
       @cat_rental_request.update(:status => "APPROVED")
+      
+      @cat_rental_request.overlapping_pending_requests.each do |request|
+        request.update(:status => "DENIED")
+      end
+      
       flash[:notice] = "Rental Request Approved"
       @cat = Cat.find(@cat_rental_request.cat_id)
       session[:cat_id] = @cat.id
