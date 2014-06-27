@@ -7,16 +7,16 @@
   
   <!-- <input type="hidden" name="auth_key" value=<%= 3 %>> -->
   Name:
-      <input type="text" name="cat[name]" 
+      <input type="text" name="cat[name]" class="myclass" 
       placeholder="name" value = <%= @cat.name %>>
       <br>
   Age: 
-      <input type="integer" name="cat[age]" 
+      <input type="integer" name="cat[age]" class="myclass" 
       placeholder="age" value = <%= @cat.age %> >
       <br>
       <br>
   Birthdate: 
-      <input type="date" name="cat[birth_date]" 
+      <input type="date" name="cat[birth_date]" class="myclass" 
       placeholder= "birthdate" value = <%= @cat.birth_date %>>
       <br>
       <br>
@@ -33,7 +33,7 @@
       <input type="radio" name="cat[sex]" value="F">Female<br>
       <br>
   Picture (url):
-      <input type="text" name="cat[image_url]" 
+      <input type="text" name="cat[image_url]" class="myclass" 
       placeholder="default image" value=<%= session[:cat_img_url] %> size="50">
       <br>  
       <br>

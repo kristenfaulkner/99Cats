@@ -8,12 +8,6 @@
     <% if self.current_user.id == @cat.user_id %>
       <%=link_to "Edit your cat", edit_cat_url(@cat) %>
     <% end %>
-    <form action="/cats/<%= @cat.id %>" method="post">
-      <% if self.current_user.id == @cat.user_id %>
-        <input type="hidden" name="_method" value="DELETE">
-        <input type="submit" value="Delete Your Cat">
-      <% end %>
-    </form>
     <% session[:cat_id] = @cat.id %>
     <% session[:cat_img_url] = @cat.image_url %>
     <% if self.current_user.id != @cat.user_id %>
@@ -25,6 +19,13 @@
     <li>
       Owner: <%= User.find(@cat.user_id).user_name %>
     </li>
+    <br>
+    <form action="/cats/<%= @cat.id %>" method="post">
+      <% if self.current_user.id == @cat.user_id %>
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete Your Cat">
+      <% end %>
+    </form>
     <br>
     <li>
       Cat Serial Number: <%=@cat.id%>
