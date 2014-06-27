@@ -1,14 +1,20 @@
 <ul style="list-style: none;">
     <li>
-      IMAGE OF THE CAT<br><img src= "<%= @cat.image_url %>" width="20%" height="20%">
+      IMAGE OF THE CAT!!!<br><img src= "<%= @cat.image_url %>" width="20%" height="20%">
     </li>
+    <% session[:cat_id] = @cat.id %>
+    <% if self.current_user.id != @cat.user_id %>
     <h3><%= link_to "Click Here To Rent Me Now!!!!!", new_cat_rental_request_url %></h3>
-    <br>
-    <li>
-      Serial Number: <%=@cat.id%>
+    <% end %>
     <li>
       Name: <%=@cat.name%>
     </li>
+    <li>
+      Owner: <%= User.find(@cat.user_id).user_name %>
+    </li>
+    <br>
+    <li>
+      Cat Serial Number: <%=@cat.id%>
     <li>
       Age: <%=@cat.age%>
     </li>
@@ -29,9 +35,19 @@
     <% counter += 1 %>
     ------------------------<br>
     <li>
-      <%= "Request ##{counter} - "%>
+      Requester: <%= User.find(rental.user_id).user_name %> - 
       Start Date: <%= rental.start_date %>
       -  End Date: <%= rental.end_date %> - Status: <%= rental.status %>
+      <% if self.current_user.id == @cat.user_id%>
+      <form action = "/cat_rental_requests/<%= rental.id%>/respond" method = "post">
+        <input type = "submit" 
+               name = "cat_rental_request[status]" 
+               value = "APPROVE">
+        <input type = "submit" 
+               name = "cat_rental_request[status]" 
+               value = "DENY">
+      </form>
+      <%end%>
     </li>
   <% end %>
   <% end %>

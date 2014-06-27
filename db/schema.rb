@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626000056) do
+ActiveRecord::Schema.define(version: 20140626223437) do
 
   create_table "cat_rental_requests", force: true do |t|
     t.integer  "cat_id",                         null: false
@@ -20,9 +20,11 @@ ActiveRecord::Schema.define(version: 20140626000056) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status",     default: "PENDING", null: false
+    t.integer  "user_id"
   end
 
   add_index "cat_rental_requests", ["cat_id"], name: "index_cat_rental_requests_on_cat_id"
+  add_index "cat_rental_requests", ["user_id"], name: "index_cat_rental_requests_on_user_id"
 
   create_table "cats", force: true do |t|
     t.integer  "age",                                                                                                               null: false
@@ -33,8 +35,21 @@ ActiveRecord::Schema.define(version: 20140626000056) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_url",  default: "http://scienceblogs.com/gregladen/files/2012/12/Beautifull-cat-cats-14749885-1600-1200.jpg"
+    t.integer  "user_id"
   end
 
   add_index "cats", ["name"], name: "index_cats_on_name"
+  add_index "cats", ["user_id"], name: "index_cats_on_user_id"
+
+  create_table "users", force: true do |t|
+    t.string   "user_name",       null: false
+    t.string   "password_digest", null: false
+    t.string   "session_token",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true
+  add_index "users", ["user_name"], name: "index_users_on_user_name", unique: true
 
 end

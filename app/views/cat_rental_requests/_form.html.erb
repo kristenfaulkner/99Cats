@@ -3,13 +3,10 @@
     <input name="_method" type="hidden" value="patch">
   <% end %>
   
-  <!-- <input type="hidden" name="auth_key" value=<%= 3 %>> -->
-  Pick A Cat:
-      <select name="cat_rental_request[cat_id]">
-        <% Cat.all.each do |cat| %>
-          <option value="<%= cat.id %>"><%= cat.name %></option>
-        <%end%>
-      </select><br>
+  <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %>>
+  <input type="hidden" name="cat_rental_request[user_id]" value=<%= self.current_user.id %>>
+       <input type="hidden" name="cat_rental_request[cat_id]" value=<%= session[:cat_id] %>>
+  <h3>Cat: <%= Cat.find(session[:cat_id]).name %></h3>
   Start Date: 
       <input type="date" name="cat_rental_request[start_date]" 
       placeholder= "Start Date" value = <%= @cat_rental_request.start_date %>>

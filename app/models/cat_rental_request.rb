@@ -1,8 +1,9 @@
 class CatRentalRequest < ActiveRecord::Base
   validates :status, presence: true
-  validate :overlapping_approved_requests
+  #validate :overlapping_approved_requests
   
   belongs_to(:cat)
+  belongs_to(:user)
   
   def overlapping_requests
     CatRentalRequest.find_by_sql([
@@ -23,10 +24,10 @@ class CatRentalRequest < ActiveRecord::Base
       ])
   end
   
-  def overlapping_approved_requests
-    unless overlapping_requests.empty?
-      errors.add(:overlap, "Overlapping Approved Rentals")
-    end
-  end
+  # def overlapping_approved_requests
+  #   if overlapping_requests
+  #     errors.add(:overlap, "Overlapping Approved Rentals")
+  #   end
+  # end
 end
 

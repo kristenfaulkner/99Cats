@@ -1,8 +1,10 @@
-
+<h1>Welcome <%= @user.user_name %>!</h1>
+<form method="post" action=<%= session_url %>>
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Log Out">
+  <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %>>
+</form>
 <h2>Choose from all our different cats!</h2>
-<%= link_to "Rent-a-cat today!", new_cat_rental_request_url %>
-<br>
-<br>
 <table align = "center">
   <tr>
     <th>Cat Serial Number</th>

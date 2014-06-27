@@ -1,6 +1,8 @@
 class CatsController < ApplicationController
   def index
     @cats = Cat.all
+    user_token = session[:session_token]
+    @user = current_user
     render 'index'
   end
   
@@ -15,7 +17,8 @@ class CatsController < ApplicationController
   
   def create
     @cat = Cat.new(cat_params)
-    
+    @cat.user_id = self.current_user.id
+        
     if @cat.save
       flash[:notice] = "Cat Created!"
       redirect_to cat_url(@cat)
@@ -26,22 +29,38 @@ class CatsController < ApplicationController
   end
   
   def edit
-    @cat = Cat.find(params[:id])
-  end
-  
-  def update
-    @cat = Cat.find(params[:id])
-    
-    if @cat.update(cat_params)
-      flash[:notice] = "Cat Updated!"
+    if !verify_owner
+      flash[:notice]= "Sorry you do not own this cat"
       redirect_to cat_url(@cat)
     else
-      flash[:notice] = "Couldn't Update Cat"
-      render 'edit'
+      @cat = Cat.find(params[:id])
     end
   end
   
+  def update
+    if !verify_owner
+      flash[:notice] = "Sorry you do not own this cat"
+      redirect_to cat_url(@cat)
+    else
+      @cat = Cat.find(params[:id])
+      if @cat.update(cat_params)
+        flash[:notice] = "Cat Updated!"
+        redirect_to cat_url(@cat)
+      else
+        flash[:notice] = "Couldn't Update Cat"
+        render 'edit'
+      end
+    end
+  end
+  
+  def verify_owner
+    @cat = Cat.find(params[:id])
+    @cat.user_id == self.current_user.id
+  end
+  
+  private
+  
   def cat_params
-    params.require(:cat).permit(:name, :age, :birth_date, :color, :sex, :image_url)
+    params.require(:cat).permit(:name, :age, :birth_date, :color, :sex, :image_url, :user_id)
   end
 end
