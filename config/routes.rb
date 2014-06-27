@@ -6,6 +6,6 @@ Rails.application.routes.draw do
       post 'respond'
     end
   end
-  resources :users, only: [:new, :create]
+  resources :user, only: [:new, :create, :show]
   resource :session, only: [:new, :create, :destroy]
 end
